@@ -1,5 +1,10 @@
 package com.example.rest.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.sql.Date;
+
 public class Student {
 
     @Override
@@ -7,22 +12,23 @@ public class Student {
         return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", marks=" + marks +
+                ", branch=" + branch +
                 '}';
     }
 
-    public Student(int id , String name , int marks ){
-        this.id = id;
-        this.name = name;
-        this.marks = marks;
+  public Student(int id , String name , String branch,Date birth){
+       this.id = id;
+       this.name = name;
+    this.branch= branch;
+    this.birth=birth;
+   }
 
-
-
-    }
     private int id;
     private String name;
 
-    private int marks;
+    private String branch;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    private Date birth;
 
     public int getId() {
         return id;
@@ -40,11 +46,22 @@ public class Student {
         this.name = name;
     }
 
-    public int getMarks() {
-        return marks;
+    public String getBranch() {
+        return branch;
     }
 
-    public void setMarks(int marks) {
-        this.marks = marks;
+    public void setBranch(String branch) {
+        System.out.println("x");
+        this.branch = branch;
     }
+
+    public Date getBirth(){return birth;}
+
+    public void setBirth(Date birth){
+
+        this.birth=birth;
+
+    }
+
+
 }
