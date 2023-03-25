@@ -1,7 +1,6 @@
 package com.example.rest.controller;
-
-import com.example.rest.dao.StudentDao;
-import com.example.rest.vo.Student;
+import com.example.rest.model.Student;
+import com.example.rest.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,18 +9,24 @@ import java.util.List;
 
 @RestController
 public class StudentController {
- @Autowired
- StudentDao dao;
+
+    private StudentService studentService;
+
+    @Autowired
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
     @PostMapping("/enterstudent")
-    public void insertStudent(@RequestBody Student s) throws SQLException {
+    public void insertStudent(@RequestBody Student s)  {
        System.out.println(s.getBirth());
-        dao.insertData(s);
+        studentService.insertStudent(s);
     }
 
 
     @GetMapping(value = "/students")
-    public List<Student> getStudents() throws SQLException {
-        return dao.getAllStudent();
+    public List<Student> getStudents()  {
+        return studentService.getAllStudent();
 
 
 
@@ -29,15 +34,14 @@ public class StudentController {
 
     @GetMapping(value="/students/{id}")
     public Student getStudent(@PathVariable Integer id){
-        return dao.getStudentById(id);
-
-
+        return studentService.getStudentById(id);
     }
+
+
+
     @PatchMapping(value="/student/updatebranch/{id}")
     public void updateBranch(@PathVariable Integer id,@RequestBody Student s){
-        dao.updateBranch(id,s);
-
-
+        studentService.updateBranch(id,s);
     }
 
 

@@ -1,7 +1,6 @@
-package com.example.rest.vo;
+package com.example.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 
@@ -21,9 +20,10 @@ public class Student {
        this.id = id;
        this.name = name;
     this.branch= branch;
-    this.birth=birth;
+
    }
 
+   //this is change 2
     private int id;
     private String name;
 
